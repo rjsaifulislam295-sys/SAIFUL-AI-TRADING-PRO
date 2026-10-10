@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SAIFUL AI TRADING PRO</title>
+    <meta
+      name="description"
+      content="SAIFUL AI TRADING PRO - mobile-friendly trading dashboard for Forex, Crypto, and Gold analysis."
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="brand">
+          <div class="brand-mark">SAIFUL</div>
+          <div class="brand-text">
+            <span>AI</span>
+            <strong>TRADING PRO</strong>
+          </div>
+        </div>
+
+        <div class="connectivity-box" aria-live="polite">
+          <span class="status-dot"></span>
+          <span id="feedStatusText">Live data unavailable</span>
+        </div>
+      </header>
+
+      <main class="dashboard">
+        <section class="panel market-selector-panel">
+          <div class="panel-top">
+            <h2>Market Watch</h2>
+          </div>
+
+          <div class="market-selector" aria-label="Market selection">
+            <button class="market-option active" data-market="forex">
+              <span class="label">Forex</span>
+              <span class="pair">EUR/USD</span>
+            </button>
+            <button class="market-option" data-market="crypto">
+              <span class="label">Crypto</span>
+              <span class="pair">BTC/USD</span>
+            </button>
+            <button class="market-option" data-market="gold">
+              <span class="label">Gold</span>
+              <span class="pair">XAU/USD</span>
+            </button>
+          </div>
+        </section>
+
+        <section class="market-overview">
+          <div class="metric-card">
+            <span class="metric-label">Market</span>
+            <strong id="marketLabel">FOREX</strong>
+          </div>
+
+          <div class="metric-card">
+            <span class="metric-label">Session</span>
+            <strong id="sessionLabel">Awaiting feed</strong>
+          </div>
+
+          <div class="metric-card">
+            <span class="metric-label">Trend</span>
+            <strong id="trendLabel">Waiting</strong>
+          </div>
+
+          <div class="metric-card">
+            <span class="metric-label">Signal</span>
+            <strong id="signalLabel">N/A</strong>
+          </div>
+        </section>
+
+        <section class="panel chart-panel">
+          <div class="panel-top">
+            <h2>Candlestick</h2>
+            <span class="live-badge offline">NO LIVE FEED</span>
+          </div>
+
+          <div class="chart-wrap">
+            <svg
+              id="candlestickChart"
+              viewBox="0 0 760 220"
+              preserveAspectRatio="none"
+              aria-label="Candlestick chart placeholder"
+            >
+              <defs>
+                <linearGradient id="chartGlow" x1="0%" x2="100%" y1="0%" y2="0%">
+                  <stop offset="0%" stop-color="#1ae4a3" stop-opacity="0.18" />
+                  <stop offset="100%" stop-color="#4fd1ff" stop-opacity="0.08" />
+                </linearGradient>
+              </defs>
+
+              <g class="chart-grid">
+                <line x1="0" y1="20" x2="760" y2="20"></line>
+                <line x1="0" y1="70" x2="760" y2="70"></line>
+                <line x1="0" y1="120" x2="760" y2="120"></line>
+                <line x1="0" y1="170" x2="760" y2="170"></line>
+                <line x1="0" y1="210" x2="760" y2="210"></line>
+              </g>
+
+              <g id="chartCandles"></g>
+
+              <rect x="0" y="0" width="760" height="220" fill="url(#chartGlow)"></rect>
+            </svg>
+
+            <div class="chart-overlay">
+              <span>Chart feed offline</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="analysis-grid">
+          <article class="panel indicator-panel">
+            <div class="panel-top">
+              <h3>RSI</h3>
+              <span class="indicator-pill">Momentum</span>
+            </div>
+
+            <div class="indicator-value" id="rsiValue">N/A</div>
+            <div class="indicator-meta" id="rsiMeta">
+              Waiting for market data
+            </div>
+
+            <div class="indicator-scale">
+              <span>0</span>
+              <span>30</span>
+              <span>50</span>
+              <span>70</span>
+              <span>100</span>
+            </div>
+
+            <div class="indicator-graph">
+              <span class="graph-bar bar-a"></span>
+              <span class="graph-bar bar-b"></span>
+              <span class="graph-bar bar-c"></span>
+              <span class="graph-bar bar-d"></span>
+              <span class="graph-bar bar-e"></span>
+            </div>
+          </article>
+
+          <article class="panel indicator-panel">
+            <div class="panel-top">
+              <h3>MACD</h3>
+              <span class="indicator-pill">Trend</span>
+            </div>
+
+            <div class="indicator-value" id="macdValue">N/A</div>
+            <div class="indicator-meta" id="macdMeta">
+              Waiting for market data
+            </div>
+
+            <div class="macd-chart" aria-label="MACD placeholder">
+              <span class="macd-node node1"></span>
+              <span class="macd-node node2"></span>
+              <span class="macd-node node3"></span>
+              <span class="macd-node node4"></span>
+              <span class="macd-node node5"></span>
+            </div>
+          </article>
+        </section>
+
+        <section class="panel analysis-panel">
+          <div class="panel-top">
+            <h2>Market Trend Analysis</h2>
+          </div>
+
+          <p id="trendAnalysis">
+            No market signal available. Connect a legitimate market data API to
+            begin generating live trend analysis.
+          </p>
+
+          <div class="status-row">
+            <div class="status-card status-up" id="statusUp">
+              <span class="status-title">UP</span>
+              <span class="status-caption">Standby</span>
+            </div>
+
+            <div class="status-card status-down" id="statusDown">
+              <span class="status-title">DOWN</span>
+              <span class="status-caption">Standby</span>
+            </div>
+
+            <div class="status-card status-wait active" id="statusWait">
+              <span class="status-title">WAIT</span>
+              <span class="status-caption">Default</span>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
